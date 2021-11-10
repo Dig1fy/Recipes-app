@@ -1,7 +1,13 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const CategoryMealsScreen = props => {
+import { CATEGORIES } from './data/dummy-data';
+
+const CategoryMealsScreen = (props) => {
+    const { categoryId } = props.route.params
+    const selectedCategory = CATEGORIES.find(c => c.id == categoryId)
+    // props.navigation.setOptions({ headerTitle: selectedCategory.title })
+
     return (
         <View style={styles.screen}>
             <Text>The CategoryMealsScreen</Text>
