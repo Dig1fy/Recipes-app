@@ -2,7 +2,7 @@ class Meal {
     //We could have the meal in different categories so we pass multiple category ids
     constructor(
         id,
-        categoryId,
+        categoryIds, //We will pass an array with different categories (the meal could  in more than 1 category)
         title,
         affordability,
         complexity,
@@ -16,7 +16,7 @@ class Meal {
         isLactoseFree
     ) {
         this.id = id;
-        this.categoryId = categoryId;
+        this.categoryIds = categoryIds;
         this.title = title;
         this.affordability = affordability;
         this.complexity = complexity;

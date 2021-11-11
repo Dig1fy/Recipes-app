@@ -13,7 +13,7 @@ const CategoriesScreen = props => {
                 itemTitle={itemData.item.title}
                 itemColor={itemData.item.color}
                 onButtonPress={() => {
-                    props.navigation.navigate('CategoryMeals', { categoryId: props.itemId })
+                    props.navigation.navigate('CategoryMeals', { categoryId: itemData.item.id })
                 }}
             />
         )
