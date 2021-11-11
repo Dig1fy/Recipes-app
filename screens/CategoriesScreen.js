@@ -13,7 +13,7 @@ const CategoriesScreen = props => {
                 itemTitle={itemData.item.title}
                 itemColor={itemData.item.color}
                 onButtonPress={() => {
-                    props.navigation.navigate('CategoryMeals', { categoryId: itemData.item.id })
+                    props.navigation.navigate('CategoryMeals', { categoryId: itemData.item.id, headerTitle: itemData.item.title })
                 }}
             />
         )
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-
     },
 })
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 
 import { CATEGORIES } from './data/dummy-data';
@@ -10,7 +10,7 @@ const CategoryMealsScreen = props => {
         return (
             <MealItem
                 item={itemData.item}
-
+                onSelectMeal={() => props.navigation.navigate('MealDetail', { 'mealId': itemData.item.id })}
 
             />
         )
@@ -20,6 +20,12 @@ const CategoryMealsScreen = props => {
 
     // We need only the meals that belong to a certain Category (i.e. current category id is presented in the meals' categoryIds array)
     const currentMeals = MEALS.filter(meal => meal.categoryIds.indexOf(categoryId) >= 0)
+
+    useEffect(() => {
+        props.navigation.setOptions({
+            title: props.route.params.headerTitle,
+        });
+    }, [props.route.params.headerTitle]);
 
     return (
         <View style={styles.screen}>
