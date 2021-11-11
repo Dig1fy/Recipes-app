@@ -12,37 +12,53 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 
 import Colors from '../screens/constants/Colors';
 
-//NESTED NAVIGATOR
+//Nested Stack navigator
+const SecondStack = createNativeStackNavigator();
+
+const FavoritesStackNavigator = () => {
+    return (
+        <SecondStack.Navigator screenOptions={screenOptions}>
+            <SecondStack.Screen name="Favorites" component={FavoritesScreen} options={{ title: "Your favorites" }} />
+            <SecondStack.Screen name="MealDetail" component={MealDetailScreen} />
+        </SecondStack.Navigator>
+    );
+}
+
+//MAIN NAVIGATOR
 const Tab = createBottomTabNavigator();
 
 const FavoriteMealsTabNavigator = () => {
     return (
         <NavigationContainer>
-            <Tab.Navigator screenOptions={{}}>
-                <Tab.Screen name='Meals' component={NestedStackNavigator} options={{ headerShown: false }}
+            <Tab.Navigator screenOptions={{ headerShown: false }}>
+                <Tab.Screen name='Meals' component={NestedStackNavigator}
                     options={() => ({
                         tabBarIcon: ({ color, size }) => {
                             let iconName = 'ios-restaurant'
-                            // We can return any component that here!
+                            // We can return any component here!
                             return <Ionicons name={iconName} size={25} color={color} />;
                         },
                         tabBarActiveTintColor: 'yellow',
                         tabBarInactiveTintColor: 'gray',
-                        tabBarActiveBackgroundColor: 'purple',
+                        tabBarActiveBackgroundColor: Colors.primaryColor,
+                        tabBarInactiveBackgroundColor: Colors.primaryColor,
                         tabBarLabelStyle: tabBarLabelStyle
                     })}
                 />
-                <Tab.Screen name='Favorites' component={FavoritesScreen}
+                <Tab.Screen name='FavStackNavigator' component={FavoritesStackNavigator}
                     options={({ route }) => ({
                         tabBarIcon: ({ focused, color, size }) => {
                             let iconName = 'star-half-outline'
                             // We can return any component that here!
                             return <Ionicons name={iconName} size={size} color={color} />;
                         },
+                        title: "Favorites",
+                        headerShown: false,
                         tabBarActiveTintColor: 'yellow',
                         tabBarInactiveTintColor: 'gray',
-                        tabBarActiveBackgroundColor: 'purple',
-                        tabBarLabelStyle: tabBarLabelStyle
+                        tabBarActiveBackgroundColor: Colors.primaryColor,
+                        tabBarInactiveBackgroundColor: Colors.primaryColor,
+                        tabBarLabelStyle: tabBarLabelStyle,
                     })}
                 />
             </Tab.Navigator>
@@ -50,7 +66,7 @@ const FavoriteMealsTabNavigator = () => {
     )
 }
 
-//MAIN NAVIGATOR
+//NESTED Stack navigator
 const Stack = createNativeStackNavigator();
 
 const NestedStackNavigator = () => {

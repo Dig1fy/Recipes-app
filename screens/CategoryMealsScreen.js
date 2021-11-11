@@ -4,17 +4,9 @@ import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 import { CATEGORIES } from './data/dummy-data';
 import { MEALS } from './data/dummy-data'
 import MealItem from '../components/MealItem';
+import MealList from '../components/MealList';
 
 const CategoryMealsScreen = props => {
-    const renderMealItem = itemData => {
-        return (
-            <MealItem
-                item={itemData.item}
-                onSelectMeal={() => props.navigation.navigate('MealDetail', { 'mealId': itemData.item.id })}
-
-            />
-        )
-    }
 
     const { categoryId } = props.route.params
 
@@ -27,14 +19,9 @@ const CategoryMealsScreen = props => {
         });
     }, [props.route.params.headerTitle]);
 
-    return (
+    return ( // MealsList does not have access to the navigations props so we need to pass it explicitly
         <View style={styles.screen}>
-            <FlatList
-                data={currentMeals}
-                keyExtractor={(item, index) => item.id} //In newer versions of ES, the key extractor automatically extracts the ID from each object passed to data as an array
-                renderItem={renderMealItem}
-                style={{ width: '100%' }}
-            />
+            <MealList data={currentMeals} navigation={props.navigation} />
             <Button title="Go to Categories" onPress={() => props.navigation.navigate('Categories')} />
         </View>
     )
