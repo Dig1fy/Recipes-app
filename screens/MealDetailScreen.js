@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
 import { MEALS } from './data/dummy-data';
+import CustomHeaderButton from '../components/HeaderButton';
 
 const MealDetailScreen = props => {
 
     const mealId = props.route.params.mealId
-    // props.navigation.setOptions({
-    //     title: `Your Updated Title`,
-    // })
     const selectedMeal = MEALS.find(meal => meal.id === mealId)
 
     useEffect(() => {
@@ -15,6 +15,17 @@ const MealDetailScreen = props => {
             title: selectedMeal.title,
         });
     }, [selectedMeal.title]);
+
+    React.useLayoutEffect(() => {
+        props.navigation.setOptions({
+            headerRight: () => (
+                <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                    <Item title="Favorites" color='yellow' iconName="ios-star" onPress={() => alert('FAAAAV')} />
+                </HeaderButtons>
+            ),
+        });
+    }, [props.navigation]);
+
 
     return (
         <View style={styles.screen}>

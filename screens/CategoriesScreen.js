@@ -24,6 +24,7 @@ const CategoriesScreen = props => {
             numColumns={2}
             data={CATEGORIES}
             renderItem={renderGridItem}
+            style={{ overflow: 'hidden', }}
             keyExtractor={(item) => item.id}
         />
     )
