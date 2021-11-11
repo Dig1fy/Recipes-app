@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Text,
+    Button,
     View,
     FlatList,
     StyleSheet
@@ -9,7 +10,6 @@ import MealItem from './MealItem';
 
 
 const MealList = props => {
-    console.log(props)
     const renderMealItem = itemData => {
         return (
             <MealItem
@@ -20,13 +20,23 @@ const MealList = props => {
     }
 
     return (
-        <FlatList
-            data={props.data}
-            keyExtractor={(item, index) => item.id} //In newer versions of ES, the key extractor automatically extracts the ID from each object passed to data as an array
-            renderItem={renderMealItem}
-            style={{ width: '100%' }}
-        />
+        <View style={styles.screen}>
+            <FlatList
+                data={props.data}
+                keyExtractor={(item, index) => item.id} //In newer versions of ES, the key extractor automatically extracts the ID from each object passed to data as an array
+                renderItem={renderMealItem}
+                style={{ width: '100%' }}
+            />
+            <Button title="Go to Categories" onPress={() => props.navigation.navigate('Categories')} />
+        </View>
     );
 }
 
+const styles = StyleSheet.create({
+    screen: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
 export default MealList;

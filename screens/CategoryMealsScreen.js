@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
-import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 
-import { CATEGORIES } from './data/dummy-data';
 import { MEALS } from './data/dummy-data'
-import MealItem from '../components/MealItem';
 import MealList from '../components/MealList';
 
 const CategoryMealsScreen = props => {
@@ -19,20 +16,8 @@ const CategoryMealsScreen = props => {
         });
     }, [props.route.params.headerTitle]);
 
-    return ( // MealsList does not have access to the navigations props so we need to pass it explicitly
-        <View style={styles.screen}>
-            <MealList data={currentMeals} navigation={props.navigation} />
-            <Button title="Go to Categories" onPress={() => props.navigation.navigate('Categories')} />
-        </View>
-    )
+    // MealsList does not have access to the navigations props so we need to pass it explicitly
+    return <MealList data={currentMeals} navigation={props.navigation} />
 }
-
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})
 
 export default CategoryMealsScreen;

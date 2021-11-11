@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import MealList from '../components/MealList';
+import { MEALS } from './data/dummy-data';
 
 const FavoritesScreen = props => {
-    return (
-        <View style={styles.screen}>
-            <Text>The FavoritesScreen</Text>
-        </View>
-    )
+
+    return <MealList data={MEALS} navigation={props.navigation} />
 }
 
 const styles = StyleSheet.create({
