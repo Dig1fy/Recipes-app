@@ -106,19 +106,45 @@ const NestedStackNavigator = (props) => {
 
 const FilterStack = createNativeStackNavigator();
 const FilterStackNav = props => (
-    <FilterStack.Navigator>
-        <FilterStack.Screen name='FavoritesScreen' component={FilterScreen} />
+    <FilterStack.Navigator screenOptions={{
+        headerTitleStyle: {
+            color: 'orange',
+            fontWeight: 'bold'
+        },
+        headerBackTitle: {
+            color: 'orange',
+            fontWeight: 'bold'
+        }
+    }}>
+        <FilterStack.Screen name='FiltersScreen' component={FilterScreen} options={{
+            headerLeft: () => (
+                <SimpleLineIcons
+                    style={{ marginRight: 20 }}
+                    name="menu"
+                    size={30}
+                    color="#900"
+                    onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
+                />
+            ),
+            title: 'Filters'
+        }} />
     </FilterStack.Navigator>
 )
 
 const Drawer = createDrawerNavigator();
 const DrawerNav = props => (
     <NavigationContainer>
-        <Drawer.Navigator>
-            <Drawer.Screen name='MealsFavorites' component={FavoriteMealsTabNavigator} options={{ headerShown: false }} />
+        <Drawer.Navigator screenOptions={{
+            drawerLabelStyle: { color: '#230142', fontSize: 18 },
+            drawerContentStyle: { backgroundColor: '#edffff' },
+            drawerActiveTintColor: 'blue',
+
+        }}>
+            <Drawer.Screen name='MealsFavorites' component={FavoriteMealsTabNavigator} options={{ headerShown: false, title: 'Meals' }} />
             <Drawer.Screen name='Filters' component={FilterStackNav} options={{
                 headerTitle: 'Filter Meals',
-                headerShown: false
+                headerShown: false,
+
             }} />
         </Drawer.Navigator>
     </NavigationContainer>

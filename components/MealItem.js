@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'brown',
         borderRadius: 2,
-        backgroundColor: '#647e9e',
+        backgroundColor: 'rgba(5, 2, 4, 0.03)',
         marginHorizontal: 5,
         height: '90%',
         overflow: 'hidden'
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
         paddingBottom: 5
     },
     text: {
-        color: 'white',
-        // fontWeight: 'bold',
+        color: 'orange',
+        fontWeight: 'bold',
         fontSize: 16,
         opacity: 0.7
     },
