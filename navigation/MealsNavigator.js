@@ -114,7 +114,17 @@ const FilterStackNav = props => (
         headerBackTitle: {
             color: 'orange',
             fontWeight: 'bold'
-        }
+        },
+        // headerRight: () => (
+        //     <Ionicons
+        //         style={{ marginRight: 20 }}
+        //         name="save-outline"
+        //         size={30}
+        //         color="#900"
+        //         // onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
+        //         onPress={() => console.log(props)}
+        //     />
+        // ),
     }}>
         <FilterStack.Screen name='FiltersScreen' component={FilterScreen} options={{
             headerLeft: () => (
@@ -126,15 +136,16 @@ const FilterStackNav = props => (
                     onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
                 />
             ),
-            headerRight: () => (
-                <Ionicons
-                    style={{ marginRight: 20 }}
-                    name="save-outline"
-                    size={30}
-                    color="#900"
-                    onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-                />
-            ),
+            // headerRight: () => (
+            //     <Ionicons
+            //         style={{ marginRight: 20 }}
+            //         name="save-outline"
+            //         size={30}
+            //         color="#900"
+            //         // onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
+            //         onPress={() => console.log(props.route)}
+            //     />
+            // ),
             title: 'Filters'
         }} />
     </FilterStack.Navigator>
@@ -144,9 +155,10 @@ const Drawer = createDrawerNavigator();
 const DrawerNav = props => (
     <NavigationContainer>
         <Drawer.Navigator screenOptions={{
-            drawerLabelStyle: { color: '#230142', fontSize: 18 },
-            drawerContentStyle: { backgroundColor: '#edffff' },
+            drawerLabelStyle: { color: 'white', fontSize: 18, },
+            drawerContentStyle: { backgroundColor: 'purple' },
             drawerActiveTintColor: 'blue',
+            overlayColor: 'pink'
 
         }}>
             <Drawer.Screen name='MealsFavorites' component={FavoriteMealsTabNavigator} options={{ headerShown: false, title: 'Meals' }} />

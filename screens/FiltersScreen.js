@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { CommonActions } from '@react-navigation/routers';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { Ionicons } from "@expo/vector-icons"
 import {
     View,
     Text,
@@ -23,6 +25,40 @@ const FiltersScreen = props => {
     const [isLactoseFree, setIsLactoseFree] = useState(false);
     const [isVegan, setIsVegan] = useState(false);
     const [isVegeterian, setIsVegeterian] = useState(false);
+
+    const saveFilters = () => {
+        const appliedFilters = {
+            isGlutenFree: isGlutenFree,
+            isLactoseFree: isLactoseFree,
+            isVegan: isVegan,
+            isVegeterian: isVegeterian
+        }
+    }
+
+    React.useLayoutEffect(() => {
+        props.navigation.setOptions({
+            headerRight: () => (
+                <Ionicons
+                    style={{ marginRight: 20 }}
+                    name="save-outline"
+                    size={30}
+                    color="#900"
+                    // onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
+                    onPress={() => console.log(props.route)}
+                />
+            ),
+        })
+        // props.navigation.setParams({ save: saveFilters })
+    }, [props.navigation]);
+    useLayoutEffect(() => {
+        //These params will be merged with other params if any
+        // props.navigation.dispatch({
+        //     ...CommonActions.setParams({ save: saveFilters }),
+        //     source: undefined,
+        // })
+        props.navigation.setParams({ save: saveFilters })
+        // console.log(props)
+    }, [isGlutenFree,])
 
 
     return (
