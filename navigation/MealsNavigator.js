@@ -21,7 +21,7 @@ import Colors from '../screens/constants/Colors';
 //Nested Stack navigator
 const SecondStack = createNativeStackNavigator();
 
-const FavoritesStackNavigator = () => {
+const FavoritesStackNavigator = (props) => {
     return (
         <SecondStack.Navigator screenOptions={screenOptions}>
             <SecondStack.Screen name="Favorites" component={FavoritesScreen} options={{
@@ -121,6 +121,15 @@ const FilterStackNav = props => (
                 <SimpleLineIcons
                     style={{ marginRight: 20 }}
                     name="menu"
+                    size={30}
+                    color="#900"
+                    onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
+                />
+            ),
+            headerRight: () => (
+                <Ionicons
+                    style={{ marginRight: 20 }}
+                    name="save-outline"
                     size={30}
                     color="#900"
                     onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
