@@ -1,5 +1,5 @@
 import { CommonActions } from '@react-navigation/routers';
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import { Ionicons } from "@expo/vector-icons"
 import {
     View,
@@ -21,44 +21,47 @@ const SwitchStatement = props => (
 )
 
 const FiltersScreen = props => {
+    const { navigation } = props;
     const [isGlutenFree, setIsGlutenFree] = useState(false);
     const [isLactoseFree, setIsLactoseFree] = useState(false);
     const [isVegan, setIsVegan] = useState(false);
     const [isVegeterian, setIsVegeterian] = useState(false);
 
-    const saveFilters = () => {
+
+    //useCallback so we don't re-create the function when there are no changes
+    const saveFilters = useCallback(() => {
         const appliedFilters = {
             isGlutenFree: isGlutenFree,
             isLactoseFree: isLactoseFree,
             isVegan: isVegan,
             isVegeterian: isVegeterian
         }
-    }
+    }, [isGlutenFree, isLactoseFree, isVegan, isVegeterian])
+
+    React.useEffect(() => {
+        navigation.dispatch(
+            CommonActions.navigate({
+                name: 'FiltersScreen',
+                params: {
+                    save: saveFilters,
+                },
+            })
+        );
+    }, [saveFilters])
 
     React.useLayoutEffect(() => {
-        props.navigation.setOptions({
+        navigation.setOptions({
             headerRight: () => (
                 <Ionicons
                     style={{ marginRight: 20 }}
                     name="save-outline"
                     size={30}
                     color="#900"
-                    // onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-                    onPress={() => console.log(props.route)}
+                    onPress={() => console.log(props)}
                 />
             ),
         })
-        // props.navigation.setParams({ save: saveFilters })
-    }, [props.navigation]);
-    useLayoutEffect(() => {
-        //These params will be merged with other params if any
-        // props.navigation.dispatch({
-        //     ...CommonActions.setParams({ save: saveFilters }),
-        //     source: undefined,
-        // })
-        props.navigation.setParams({ save: saveFilters })
-        // console.log(props)
-    }, [isGlutenFree,])
+    }, [saveFilters]);
 
 
     return (

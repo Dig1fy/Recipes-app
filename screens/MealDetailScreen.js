@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {
     View,
     Text,
@@ -9,29 +9,46 @@ import {
 } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import { MEALS } from './data/dummy-data';
 import CustomHeaderButton from '../components/HeaderButton';
 
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleFavoriteMeal } from '../redux/actions/meals';
+
 const MealDetailScreen = props => {
-
+    //CategoryMealsScreen -> MealList -> MealItem (props: mealId)
     const mealId = props.route.params.mealId
-    const selectedMeal = MEALS.find(meal => meal.id === mealId)
+    const filteredMeals = useSelector(state => state.meals.filteredMeals)
+    const isFavorite = useSelector(state => state.meals.favoriteMeals.find(meal => meal.id === mealId));
 
+    const selectedMeal = filteredMeals.find(meal => meal.id === mealId)
+
+    const dispatch = useDispatch();
+
+    const toggleFavHandler = useCallback(() => {
+        dispatch(toggleFavoriteMeal(mealId));
+    }, [mealId])
+
+    //Show the name of the selected meal in the header
     useEffect(() => {
         props.navigation.setOptions({
             title: selectedMeal.title,
         });
     }, [selectedMeal.title]);
 
+    useEffect(() => {
+        props.navigation.setOptions({ isCurrentMealFavorite: isFavorite })
+    }, [isFavorite])
+
     React.useLayoutEffect(() => {
         props.navigation.setOptions({
             headerRight: () => (
                 <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                    <Item title="Favorites" color='yellow' iconName="ios-star" onPress={() => alert('FAAAAV')} />
+                    <Item title="Favorites" color={'yellow'} iconName={isFavorite ? 'ios-star' : 'ios-star-outline'} onPress={toggleFavHandler} />
                 </HeaderButtons>
             ),
         });
-    }, [props.navigation]);
+    }, [props.navigation, isFavorite]);
 
 
     return (

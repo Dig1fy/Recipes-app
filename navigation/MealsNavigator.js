@@ -115,16 +115,6 @@ const FilterStackNav = props => (
             color: 'orange',
             fontWeight: 'bold'
         },
-        // headerRight: () => (
-        //     <Ionicons
-        //         style={{ marginRight: 20 }}
-        //         name="save-outline"
-        //         size={30}
-        //         color="#900"
-        //         // onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-        //         onPress={() => console.log(props)}
-        //     />
-        // ),
     }}>
         <FilterStack.Screen name='FiltersScreen' component={FilterScreen} options={{
             headerLeft: () => (
@@ -138,6 +128,7 @@ const FilterStackNav = props => (
             ),
             // headerRight: () => (
             //     <Ionicons
+            //         {...props}
             //         style={{ marginRight: 20 }}
             //         name="save-outline"
             //         size={30}

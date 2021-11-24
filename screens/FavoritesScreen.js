@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import MealList from '../components/MealList';
-import { MEALS } from './data/dummy-data';
 
 const FavoritesScreen = props => {
 
-    return <MealList data={MEALS} navigation={props.navigation} />
+    const favMeals = useSelector(state => state.meals.favoriteMeals)
+    return <MealList data={favMeals} navigation={props.navigation} />
 }
 
 const styles = StyleSheet.create({

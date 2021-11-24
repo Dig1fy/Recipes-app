@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 
-import { MEALS } from './data/dummy-data'
+import { useSelector } from 'react-redux';
 import MealList from '../components/MealList';
 
 const CategoryMealsScreen = props => {
 
     const { categoryId } = props.route.params
+    const allFilteredMeals = useSelector(state => state.meals.filteredMeals)
 
-    // We need only the meals that belong to a certain Category (i.e. current category id is presented in the meals' categoryIds array)
-    const currentMeals = MEALS.filter(meal => meal.categoryIds.indexOf(categoryId) >= 0)
+    const currentMeals = allFilteredMeals.filter(meal => meal.categoryIds.indexOf(categoryId) >= 0)
 
     useEffect(() => {
         props.navigation.setOptions({
