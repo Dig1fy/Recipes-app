@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import Colors from './constants/Colors';
+import {
+    StyleSheet,
+    FlatList
+} from 'react-native';
 
 import GridItemRenderer from '../components/GridItemsRenderer';
 import { CATEGORIES } from './data/dummy-data';

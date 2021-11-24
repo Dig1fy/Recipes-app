@@ -2,7 +2,6 @@ import React, { useEffect, useCallback } from 'react';
 import {
     View,
     Text,
-    Button,
     StyleSheet,
     Image,
     ScrollView

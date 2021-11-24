@@ -1,12 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
 
 // Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Ionicons, MaterialIcons, SimpleLineIcons } from '@expo/vector-icons'
+import { Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { DrawerActions } from '@react-navigation/routers';
 
 // Screens
@@ -126,17 +125,6 @@ const FilterStackNav = props => (
                     onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
                 />
             ),
-            // headerRight: () => (
-            //     <Ionicons
-            //         {...props}
-            //         style={{ marginRight: 20 }}
-            //         name="save-outline"
-            //         size={30}
-            //         color="#900"
-            //         // onPress={() => props.navigation.dispatch(DrawerActions.toggleDrawer())}
-            //         onPress={() => console.log(props.route)}
-            //     />
-            // ),
             title: 'Filters'
         }} />
     </FilterStack.Navigator>

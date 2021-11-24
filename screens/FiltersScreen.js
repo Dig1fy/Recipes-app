@@ -1,5 +1,4 @@
-import { CommonActions } from '@react-navigation/routers';
-import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Ionicons } from "@expo/vector-icons"
 import {
     View,
@@ -8,7 +7,7 @@ import {
     Switch
 } from 'react-native';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setFilters } from '../redux/actions/meals';
 
 const SwitchStatement = props => (
@@ -28,7 +27,7 @@ const FiltersScreen = props => {
     const [isGlutenFree, setIsGlutenFree] = useState(false);
     const [isLactoseFree, setIsLactoseFree] = useState(false);
     const [isVegan, setIsVegan] = useState(false);
-    const [isVegeterian, setIsVegeterian] = useState(false);
+    const [isVegetarian, setIsVegeterian] = useState(false);
     let dispatch = useDispatch();
 
     //useCallback so we don't re-create the function when there are no changes
@@ -37,24 +36,22 @@ const FiltersScreen = props => {
             isGlutenFree: isGlutenFree,
             isLactoseFree: isLactoseFree,
             isVegan: isVegan,
-            isVegeterian: isVegeterian
+            isVegetarian: isVegetarian
         }
-        dispatch(setFilters(appliedFilters));
-    }, [isGlutenFree, isLactoseFree, isVegan, isVegeterian, dispatch])
 
-    React.useEffect(() => {
-        navigation.setOptions({
-            save: saveFilters
-        })
-        // navigation.dispatch(
-        //     CommonActions.setOptions({
-        //         name: 'FiltersScreen',
-        //         params: {
-        //             save: saveFilters,
-        //         },
-        //     })
-        // );
-    }, [saveFilters])
+        dispatch(setFilters(appliedFilters));
+    }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch])
+
+    // React.useEffect(() => {
+    //     // navigation.setOptions(
+    //     //     CommonActions.setOptions({
+    //     //         name: 'FiltersScreen',
+    //     //         params: {
+    //     //             save: saveFilters,
+    //     //         },
+    //     //     })
+    //     // );
+    // }, [saveFilters])
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -77,7 +74,7 @@ const FiltersScreen = props => {
             <SwitchStatement label="Gluten-free" state={isGlutenFree} onChange={() => setIsGlutenFree(!isGlutenFree)} />
             <SwitchStatement label="Lactose-free" state={isLactoseFree} onChange={() => setIsLactoseFree(!isLactoseFree)} />
             <SwitchStatement label="Vegan-free" state={isVegan} onChange={() => setIsVegan(!isVegan)} />
-            <SwitchStatement label="Vegeterian" state={isVegeterian} onChange={() => setIsVegeterian(!isVegeterian)} />
+            <SwitchStatement label="Vegetarian" state={isVegetarian} onChange={() => setIsVegeterian(!isVegetarian)} />
         </View>
     )
 }
