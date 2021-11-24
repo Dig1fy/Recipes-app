@@ -8,6 +8,9 @@ import {
     Switch
 } from 'react-native';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { setFilters } from '../redux/actions/meals';
+
 const SwitchStatement = props => (
     <View style={styles.filterContainer}>
         <Text>{props.label}</Text>
@@ -26,7 +29,7 @@ const FiltersScreen = props => {
     const [isLactoseFree, setIsLactoseFree] = useState(false);
     const [isVegan, setIsVegan] = useState(false);
     const [isVegeterian, setIsVegeterian] = useState(false);
-
+    let dispatch = useDispatch();
 
     //useCallback so we don't re-create the function when there are no changes
     const saveFilters = useCallback(() => {
@@ -36,17 +39,21 @@ const FiltersScreen = props => {
             isVegan: isVegan,
             isVegeterian: isVegeterian
         }
-    }, [isGlutenFree, isLactoseFree, isVegan, isVegeterian])
+        dispatch(setFilters(appliedFilters));
+    }, [isGlutenFree, isLactoseFree, isVegan, isVegeterian, dispatch])
 
     React.useEffect(() => {
-        navigation.dispatch(
-            CommonActions.navigate({
-                name: 'FiltersScreen',
-                params: {
-                    save: saveFilters,
-                },
-            })
-        );
+        navigation.setOptions({
+            save: saveFilters
+        })
+        // navigation.dispatch(
+        //     CommonActions.setOptions({
+        //         name: 'FiltersScreen',
+        //         params: {
+        //             save: saveFilters,
+        //         },
+        //     })
+        // );
     }, [saveFilters])
 
     React.useLayoutEffect(() => {
@@ -57,7 +64,7 @@ const FiltersScreen = props => {
                     name="save-outline"
                     size={30}
                     color="#900"
-                    onPress={() => console.log(props)}
+                    onPress={() => saveFilters()}
                 />
             ),
         })
